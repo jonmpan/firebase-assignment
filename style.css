@@ -1,0 +1,56 @@
+#timerDisplay {
+	height: 50px;
+	width: 50px;
+	color: blue;
+	font-size: 40px;
+	font-weight: 900;
+	line-height: 36px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	border: blue 6px solid;
+	border-radius: 25px;
+}
+
+#cirnoClickGif {
+	max-width: 100%;
+	height: auto;
+	filter: brightness(50%);
+	-webkit-transition : -webkit-filter 500ms linear
+}
+
+#clickCountP1 {
+	text-align: center;
+	color: blue;
+	font-size: 30px;
+	font-weight: 900;
+	line-height: 36px;	
+}
+
+#cirnoClickOverlay {
+	text-align: center;
+	vertical-align: center;
+	font-size: 30px;
+	color: white;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 10%;
+    width: 50%;
+    margin: -5% 0 0 -25%;
+}
+
+#opponentScore {
+	font-size: 20px;
+	color: white;
+}
+
+.disable-select {
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
