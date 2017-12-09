@@ -420,7 +420,10 @@ var newGame = function() {
 	$('#timerDisplay').text('9');
 }
 
-
+window.onbeforeunload = function() {
+   dbReadyP1.set(false);
+   dbClickCountP1.set(0);
+}
 
 // $('body').click(function(event){
 // 	punchNo++;

@@ -414,3 +414,8 @@ var newGame = function() {
 	$('#enemyDisplay').text('Enemy: 0');
 	$('#timerDisplay').text('9');
 }
+
+window.onbeforeunload = function() {
+   dbReadyP2.set(false);
+   dbClickCountP2.set(0);
+}
