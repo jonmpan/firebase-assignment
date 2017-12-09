@@ -17,6 +17,7 @@ dbClickCountP2.set(0);
 punchNo = 0;
 var explosionTimeout;
 var sessionHighScore = 0;
+clickToPlay = 20;
 
 var mainSong = $('#backAudio');
 var oneSound = new Audio('audio/1.mp3');
@@ -119,6 +120,7 @@ $('#muteButton').click(function(){
 		goSound.volume = 1;
 		timeSound.volume = 1;
 		victorySound.volume = 1;
+		victoryCheerSound.volume = 1;
 		defeatSound.volume = 1;
 		punch1Sound.volume = 1;
 		punch2Sound.volume = 1;
@@ -142,8 +144,8 @@ $('#muteButton').click(function(){
 })
 
 dbReadyP1.on('value', snap=>{
-	console.log(snap.val());
-	if(snap.val()==true){
+	console.log('p1ready: '+snap.val());
+	if(snap.val()==true  && clickToPlay > 0){
 		if(readyP2){
 			readyP1 = snap.val();
 			gameStartTimer();
@@ -168,6 +170,8 @@ dbClickCountP1.on('value', snap=>{
 	$('#enemyDisplay').text('Enemy: '+snap.val());
 })
 
+singlePlayer = false;
+
 $('#cirnoClick').mousedown(function(){
 	if(!gameStart && !gameStarting){
 		if(!readyP1){
@@ -182,7 +186,18 @@ $('#cirnoClick').mousedown(function(){
 			dbReadyP2.set(true);
 		}
 	}
-	if(gameStart && gameStarting){
+	else if(!gameStart && gameStarting && !readyP1 && !singlePlayer){
+		if(clickToPlay>0){
+		$('#cirnoClickOverlay').empty();
+		$('#cirnoClickOverlay').append('<div>Click '+clickToPlay+' times for single player</div>');
+		clickToPlay--;
+		}
+		else {
+			singlePlayer = true;
+			gameStartTimer();
+		}
+	}
+	else if(gameStart && gameStarting){
 		clickCountP2 += 1;
 		$('#clickCountDisplay').text('Clicks: ' +clickCountP2);
 		$('#cirnoClickGif').attr('src', 'images/cirnoclicked.gif');
@@ -306,6 +321,7 @@ var gameStartTimer1 = function() {
 }
 
 var gameStartTimer0 = function() {
+	dbReadyP2.set(false);
 	goSound.play();
 	gameStarting = true;
 	gameStart = true;
@@ -361,7 +377,9 @@ var scoreDisplay = function() {
 	}
 	if(clickCountP2>clickCountP1){
 		victorySound.play();
-		victoryCheerSound.volume = .4;
+		if(!mute){
+			victoryCheerSound.volume = .4;
+		}
 		setTimeout(function(){victoryCheerSound.play()}, 1500);
 		$('#cirnoClickOverlay').append("<div class='animated bounceIn'>Victory!<div id='opponentScore'>Opponent: "+clickCountP1+"</div></div>");
 		setTimeout(newGame, 5000);
@@ -380,11 +398,13 @@ var scoreDisplay = function() {
 var newGame = function() {
 	$('#cirnoClickOverlay').empty();
 	$('#cirnoClickOverlay').append("<div class='animated bounceIn'>Click to Start!</div>");
+	clickToPlay = 20;
 	gameStart = false;
 	gameStarting = false;
-	readyP1 = false;
+	singlePlayer = false;
+	// readyP1 = false;
 	readyP2 = false;
-	dbReadyP1.set(false);
+	// dbReadyP1.set(false);
 	dbReadyP2.set(false);
 	dbClickCountP1.set(0);
 	dbClickCountP2.set(0);
