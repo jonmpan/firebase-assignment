@@ -1,3 +1,24 @@
+
+
+#muteButton {
+	background: none;
+	padding: 0px;
+	margin: 0px;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	border: none;
+}
+#muteButton:active {
+	border: 0px;
+	outline: 0px;
+}
+
+#mute{
+	width: 50px;
+	height: auto;
+}
+
 #timerDisplay {
 	height: 50px;
 	width: 50px;
@@ -21,13 +42,26 @@
 	-webkit-transition : -webkit-filter 500ms linear
 }
 
-#clickCountP1 {
+#clickCountDisplay, #enemyDisplay {
 	text-align: center;
 	color: blue;
 	font-size: 30px;
 	font-weight: 900;
 	line-height: 36px;	
 }
+
+#enemyDisplay {
+	font-size: 30px;
+	color: red;
+}
+/*
+#clickCountP2 {
+	text-align: center;
+	color: blue;
+	font-size: 30px;
+	font-weight: 900;
+	line-height: 36px;	
+}*/
 
 #cirnoClickOverlay {
 	text-align: center;
@@ -53,4 +87,50 @@
 	-moz-user-select:none;
 	-ms-user-select:none;
 	user-select:none;
+}
+
+.punch1 {
+	width: 200px;
+	height: auto;
+	pointer-events: none;
+	position: fixed;
+}
+
+.explosionStyle {
+	height: 125vh;
+	width: auto;
+	pointer-events: none;
+	position: fixed;
+	bottom: 0;
+}
+
+
+@media (max-width: 1000000px) {
+	.explosionStyle{
+		left:20%;
+	}
+}
+
+@media (max-width: 1500px) {
+	.explosionStyle{
+		left:5%;
+	}
+}
+
+@media (max-width: 1000px) {
+	.explosionStyle{
+		left:-15%;
+	}
+}
+
+@media (max-width: 750px) {
+	.explosionStyle{
+		left:-20%;
+	}
+}
+
+@media (max-width: 600px) {
+	.explosionStyle{
+		left:-30%;
+	}
 }

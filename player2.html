@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="animate.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
+<audio id="backAudio" src="audio/easy.mp3" loop></audio>
 <body>
 
 <div class="container">
@@ -32,15 +33,30 @@
 </div>
 
 <div class="container">
-<div id="row">
-	<div class="col-xs-3"></div>
-	<div id="clickCountP1" class="col-xs-6 disable-select">Clicks: 0</div>
-	<div class="col-xs-3"></div>
+	<div id="row">
+		<div class="col-xs-3"></div>
+		<div id="clickCountDisplay" class="col-xs-6 disable-select">Clicks: 0</div>
+		<div class="col-xs-3"></div>
+	</div>
 </div>
+
+<div class="container">
+	<div id="row">
+		<div class="col-xs-3"></div>
+		<div id="enemyDisplay" class="col-xs-6 disable-select">Enemy: 0</div>
+		<div class="col-xs-3"></div>
+	</div>
 </div>
-<!-- 
-<button id="setP2Ready">P1Ready</button>
-<button id="setP2Click">P1Click</button> -->
+
+<button id="muteButton">
+	<img id="mute" src="images/unmuted.png"></img>
+</button>
+
+<div id="appendPunch1"></div>
+<div id="appendPunch2"></div>
+<div id="appendPunch3"></div>
+<div id="appendPunch4"></div>
+<div id="appendPunch5"></div>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
