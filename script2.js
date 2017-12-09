@@ -15,6 +15,8 @@ var dbClickCountP2 = firebase.database().ref('clickCountP2');
 dbClickCountP1.set(0);
 dbClickCountP2.set(0);
 punchNo = 0;
+var explosionTimeout;
+var sessionHighScore = 0;
 
 var mainSong = $('#backAudio');
 var oneSound = new Audio('audio/1.mp3');
@@ -31,6 +33,46 @@ var punch3Sound = new Audio('audio/Punch3.wav');
 var punch4Sound = new Audio('audio/Punch4.wav');
 var explosionSound = new Audio('audio/explosion.mp3');
 var screamSound = new Audio('audio/scream.wav');
+
+var dbHighScores = firebase.database().ref('/highScores');
+var name = 'Nameless';
+$('#tableStyle').toggle();
+
+$('#submitName').click(function(){
+	event.preventDefault();
+	name = document.getElementById('name-input').value;
+	$('#sessionHighScore').text(name+': '+sessionHighScore);
+	$('#formStyle').hide();
+	$('#tableStyle').toggle();
+	if(sessionHighScore>0){
+		dbHighScores.push({ name: name , score: sessionHighScore });
+	}
+	appendTable();
+});
+
+highScoresArray = [];
+
+var appendTable = function(){
+	$('#tableAppend').empty();
+	highScoresArray.sort(function (a, b) {
+  		return a.score - b.score;
+	});
+	for(i=0; i<10; i++){
+		$('#tableAppend').prepend('<tr><td><strong>'+highScoresArray[i].name+'</strong></td><td class="alignRight">'+highScoresArray[i].score+'</td></tr>')
+	}
+}
+
+dbHighScores.orderByChild("score").limitToLast(10).on('child_added', snap=>{
+	console.log(snap.val());
+	var tempObj = {name: snap.val().name , score: snap.val().score };
+	console.log(tempObj);
+	highScoresArray.push(tempObj);
+	// highScoresArray.sort(function (a, b) {
+ //  		return a.score - b.score;
+	// });
+	console.log(highScoresArray);
+	appendTable();
+});
 
 mute = false;
 mainSong.get(0).play();
@@ -214,11 +256,12 @@ $('#cirnoClick').mousedown(function(){
 		else if(randomPunch>99){
 			clickCountP2 += 50;
 			dbClickCountP2.set(clickCountP2);
+			clearTimeout(explosionTimeout);
 			$('#appendPunch5').append('<img id="punch'+punchNo+'" class="explosionStyle">');
 			setTimeout(function(){
 				document.getElementById('punch'+punchNo+'').src = 'images/explosion.gif';
 			}, 0);
-			setTimeout(function(){
+			explosionTimeout = setTimeout(function(){
 				$('#appendPunch5').empty();
 			}, 2500);			
 			explosionSound.pause();
@@ -309,9 +352,17 @@ var timer = {
 var scoreDisplay = function() {
 	console.log('scoreDisplay');
 	$('#cirnoClickOverlay').empty();
+	if(clickCountP2>sessionHighScore){
+		sessionHighScore = clickCountP2;
+		$('#sessionHighScore').text(name+": "+sessionHighScore);
+		if(name != 'Nameless'){
+			dbHighScores.push({ name: name , score: sessionHighScore });
+		}
+	}
 	if(clickCountP2>clickCountP1){
-		victoryCheerSound.play();
 		victorySound.play();
+		victoryCheerSound.volume = .4;
+		setTimeout(function(){victoryCheerSound.play()}, 1500);
 		$('#cirnoClickOverlay').append("<div class='animated bounceIn'>Victory!<div id='opponentScore'>Opponent: "+clickCountP1+"</div></div>");
 		setTimeout(newGame, 5000);
 	}

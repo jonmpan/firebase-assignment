@@ -42,7 +42,7 @@
 	-webkit-transition : -webkit-filter 500ms linear
 }
 
-#clickCountDisplay, #enemyDisplay {
+#clickCountDisplay, #enemyDisplay, #sessionHighScore {
 	text-align: center;
 	color: blue;
 	font-size: 30px;
@@ -102,6 +102,7 @@
 	pointer-events: none;
 	position: fixed;
 	bottom: 0;
+	z-index: 999;
 }
 
 
@@ -133,4 +134,81 @@
 	.explosionStyle{
 		left:-30%;
 	}
+}
+
+
+#name-input {
+	text-align: center;
+}
+
+#formStyle {
+	width: 30%;
+	position: fixed;
+	bottom: 0px;
+	left: 35%;
+	background-color: blue;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+tr, th {
+	text-align: left;
+	padding: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+td, th {
+	padding-left: 20px;
+	border-bottom: solid 1px white;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+thead {
+	margin: 10px;
+}
+
+#tableStyle {
+	width: 30%;
+	position: fixed;
+	bottom: -310px;
+	left: 35%;
+	background-color: blue;
+	color: white;
+	padding-top: 10px;
+	border-radius: 5px;
+	transition: bottom ease 0.5s;
+	/*visibility: hidden;*/
+}
+
+#tableStyle:hover {
+	bottom: 0px;
+}
+
+.topPadding {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	border-bottom: solid 1px white;
+}
+
+.alignRight {
+	text-align: right;
+	padding-right: 20px;
+}
+@media (max-width: 1000px){
+	#formStyle, #tableStyle {
+		width: 66.666667%;
+		left: 16.666667%;
+	}
+}
+
+#submitName {
+	width: 100%;
+}
+
+p{
+	text-align: center;
 }

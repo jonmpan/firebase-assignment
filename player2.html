@@ -21,14 +21,14 @@
 
 <div class="container">
 <div id="row">
-	<div class="col-xs-2 col-sm-3"></div>
-	<div id="cirnoClick" class="col-xs-8 col-sm-6 disable-select">
+	<div class="col-xs-2 col-md-3"></div>
+	<div id="cirnoClick" class="col-xs-8 col-md-6 disable-select">
 		<img id="cirnoClickGif" src="images/cirno.gif">
 		<div id="cirnoClickOverlay">
 			<div class="animated bounceIn">Click to Start!</div>
 		</div>
 	</div>
-	<div class="col-xs-2 col-sm-3"></div>
+	<div class="col-xs-2 col-md-3"></div>
 </div>
 </div>
 
@@ -48,6 +48,14 @@
 	</div>
 </div>
 
+<div class="container">
+	<div id="row">
+		<div class="col-xs-3"></div>
+		<div id="sessionHighScore" class="col-xs-6 disable-select">Your High Score: 0</div>
+		<div class="col-xs-3"></div>
+	</div>
+</div>
+
 <button id="muteButton">
 	<img id="mute" src="images/unmuted.png"></img>
 </button>
@@ -57,6 +65,37 @@
 <div id="appendPunch3"></div>
 <div id="appendPunch4"></div>
 <div id="appendPunch5"></div>
+
+<form id="formStyle">
+	<p><strong>Input Name For High Scores</strong></p>
+	<div class="input">
+	  <input type="text" id="name-input" class="form-control" placeholder="Name" aria-describedby="basic-addon1" maxlength="10" autocomplete="off"/>
+	</div>
+	<input type="submit" class="btn btn-primary" id="submitName">
+</form> 
+
+<table id="tableStyle">
+	<thead>
+		<tr>
+			<th class="topPadding"><strong>Clickers</strong></th>
+			<th class="alignRight topPadding"><strong>Clicks</strong></th>
+		</tr>
+	</thead>
+	<tbody id="tableAppend">
+<!--     	<tr>
+    		<td><strong>Jon</strong></td>
+    		<td class="alignRight">254</td>
+    	</tr>
+    	<tr>
+    		<td><strong>Nameless</strong></td>
+    		<td class="alignRight">221</td>
+    	</tr>
+    	<tr>
+    		<td><strong>George</strong></td>
+    		<td class="alignRight">198</td>
+    	</tr> -->
+    </tbody>
+</table>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
