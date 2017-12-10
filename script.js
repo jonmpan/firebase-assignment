@@ -58,15 +58,8 @@ var appendTable = function(){
 	highScoresArray.sort(function (a, b) {
   		return a.score - b.score;
 	});
-	if(appendTable.length < 10){
-		for(i=0; i<appendTable.length; i++){
-			$('#tableAppend').prepend('<tr><td><strong>'+highScoresArray[i].name+'</strong></td><td class="alignRight">'+highScoresArray[i].score+'</td></tr>')
-		}
-	}
-	else{
-		for(i=0; i<10; i++){
-			$('#tableAppend').prepend('<tr><td><strong>'+highScoresArray[i].name+'</strong></td><td class="alignRight">'+highScoresArray[i].score+'</td></tr>')
-		}
+	for(i=0; i<10; i++){
+		$('#tableAppend').prepend('<tr><td><strong>'+highScoresArray[i].name+'</strong></td><td class="alignRight">'+highScoresArray[i].score+'</td></tr>')
 	}
 }
 
